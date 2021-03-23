@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -21,8 +21,11 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		2B248C5A2609E9FA009756EF /* FileLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B248C592609E9FA009756EF /* FileLoader.swift */; };
+		2B248C852609EECF009756EF /* feed.atom in Resources */ = {isa = PBXBuildFile; fileRef = 2B248C562609E8EB009756EF /* feed.atom */; };
+		2B248C8A2609EED2009756EF /* test.zip in Resources */ = {isa = PBXBuildFile; fileRef = 2B248C572609E9C0009756EF /* test.zip */; };
 		OBJ_25 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* DataSource.swift */; };
-		OBJ_26 /* FileExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* FileExtractor.swift */; };
+		OBJ_26 /* ArchiveFileExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* ArchiveFileExtractor.swift */; };
 		OBJ_33 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_44 /* GoogleTakeoutDecoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* GoogleTakeoutDecoderTests.swift */; };
 		OBJ_45 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* XCTestManifests.swift */; };
@@ -47,9 +50,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B248C562609E8EB009756EF /* feed.atom */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = feed.atom; sourceTree = "<group>"; };
+		2B248C572609E9C0009756EF /* test.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = test.zip; sourceTree = "<group>"; };
+		2B248C592609E9FA009756EF /* FileLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileLoader.swift; sourceTree = "<group>"; };
 		"GoogleTakeoutDecoder::GoogleTakeoutDecoder::Product" /* GoogleTakeoutDecoder.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleTakeoutDecoder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"GoogleTakeoutDecoder::GoogleTakeoutDecoderTests::Product" /* GoogleTakeoutDecoderTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = GoogleTakeoutDecoderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		OBJ_10 /* FileExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileExtractor.swift; sourceTree = "<group>"; };
+		OBJ_10 /* ArchiveFileExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFileExtractor.swift; sourceTree = "<group>"; };
 		OBJ_13 /* GoogleTakeoutDecoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleTakeoutDecoderTests.swift; sourceTree = "<group>"; };
 		OBJ_14 /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
 		OBJ_19 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -79,8 +85,18 @@
 		2B248C552609E33A009756EF /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				2B248C572609E9C0009756EF /* test.zip */,
+				2B248C562609E8EB009756EF /* feed.atom */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		2B248C632609E9FD009756EF /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2B248C592609E9FA009756EF /* FileLoader.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		OBJ_11 /* Tests */ = {
@@ -94,9 +110,10 @@
 		OBJ_12 /* GoogleTakeoutDecoderTests */ = {
 			isa = PBXGroup;
 			children = (
-				2B248C552609E33A009756EF /* Data */,
 				OBJ_13 /* GoogleTakeoutDecoderTests.swift */,
 				OBJ_14 /* XCTestManifests.swift */,
+				2B248C552609E33A009756EF /* Data */,
+				2B248C632609E9FD009756EF /* Helpers */,
 			);
 			name = GoogleTakeoutDecoderTests;
 			path = Tests/GoogleTakeoutDecoderTests;
@@ -118,7 +135,7 @@
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -128,7 +145,6 @@
 				OBJ_16 /* Products */,
 				OBJ_19 /* README.md */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_7 /* Sources */ = {
@@ -142,8 +158,8 @@
 		OBJ_8 /* GoogleTakeoutDecoder */ = {
 			isa = PBXGroup;
 			children = (
+				OBJ_10 /* ArchiveFileExtractor.swift */,
 				OBJ_9 /* DataSource.swift */,
-				OBJ_10 /* FileExtractor.swift */,
 			);
 			name = GoogleTakeoutDecoder;
 			path = Sources/GoogleTakeoutDecoder;
@@ -174,6 +190,7 @@
 			buildPhases = (
 				OBJ_43 /* Sources */,
 				OBJ_46 /* Frameworks */,
+				2B248C772609EEC9009756EF /* Resources */,
 			);
 			buildRules = (
 			);
@@ -209,13 +226,13 @@
 				LastUpgradeCheck = 9999;
 			};
 			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "GoogleTakeoutDecoder" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 11.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_16 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -228,13 +245,25 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		2B248C772609EEC9009756EF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2B248C852609EECF009756EF /* feed.atom in Resources */,
+				2B248C8A2609EED2009756EF /* test.zip in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		OBJ_24 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
 				OBJ_25 /* DataSource.swift in Sources */,
-				OBJ_26 /* FileExtractor.swift in Sources */,
+				OBJ_26 /* ArchiveFileExtractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +279,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				2B248C5A2609E9FA009756EF /* FileLoader.swift in Sources */,
 				OBJ_44 /* GoogleTakeoutDecoderTests.swift in Sources */,
 				OBJ_45 /* XCTestManifests.swift in Sources */,
 			);
@@ -282,7 +312,10 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = GoogleTakeoutDecoder.xcodeproj/GoogleTakeoutDecoder_Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(TOOLCHAIN_DIR)/usr/lib/swift/macosx",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
@@ -310,7 +343,10 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = GoogleTakeoutDecoder.xcodeproj/GoogleTakeoutDecoder_Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(TOOLCHAIN_DIR)/usr/lib/swift/macosx",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
@@ -342,11 +378,11 @@
 					"SWIFT_PACKAGE=1",
 					"DEBUG=1",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE DEBUG";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -397,13 +433,14 @@
 					"$(inherited)",
 					"SWIFT_PACKAGE=1",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				USE_HEADERMAP = NO;
 			};
 			name = Release;
@@ -420,7 +457,11 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = GoogleTakeoutDecoder.xcodeproj/GoogleTakeoutDecoderTests_Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@loader_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
@@ -445,7 +486,11 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = GoogleTakeoutDecoder.xcodeproj/GoogleTakeoutDecoderTests_Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@loader_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
