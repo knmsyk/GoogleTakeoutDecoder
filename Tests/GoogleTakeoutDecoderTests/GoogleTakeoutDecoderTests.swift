@@ -2,14 +2,10 @@ import XCTest
 @testable import GoogleTakeoutDecoder
 
 final class GoogleTakeoutDecoderTests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(GoogleTakeoutDecoder().text, "Hello, World!")
+    func testDecodeBlogger() {
     }
 
     static var allTests = [
-        ("testExample", testExample),
+        ("testExample", testDecodeBlogger),
     ]
 }
