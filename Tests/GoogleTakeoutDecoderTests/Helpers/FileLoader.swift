@@ -4,15 +4,13 @@
 
 import Foundation
 
-final class FileLoader {
-    private lazy var bundle = Bundle(for: type(of: self))
-
+struct FileLoader {
     func url(_ file: File) -> URL? {
-        bundle.url(forResource: file.name, withExtension: file.ext)
+        Bundle.module.url(forResource: file.name, withExtension: file.ext)
     }
 
     func load(_ file: File) throws -> Data {
-        return try Data(contentsOf: url(file)!)
+        try Data(contentsOf: url(file)!)
     }
 }
 
@@ -41,7 +39,7 @@ extension FileLoader {
     }
 
     enum Zip: String {
-        case test
+        case takeout
     }
 
     enum Atom: String {

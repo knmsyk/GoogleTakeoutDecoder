@@ -4,7 +4,7 @@
 
 import Foundation
 
-enum DataSource {
+public enum DataSource: CaseIterable {
     case blogger
 }
 
