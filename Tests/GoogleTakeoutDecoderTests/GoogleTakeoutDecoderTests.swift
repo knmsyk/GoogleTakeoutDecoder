@@ -30,5 +30,6 @@ final class GoogleTakeoutDecoderTests: XCTestCase {
 
     static var allTests = [
         ("testDecode", testDecode),
+        ("testDecodeBlogger", testDecodeBlogger),
     ]
 }
