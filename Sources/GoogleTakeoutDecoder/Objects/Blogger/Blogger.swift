@@ -25,11 +25,11 @@ extension Blogger.Blog {
         public let type: String
         public let status: String
         public let author: Author
-        public let title: String
-        public let content: Content
-        public let created: Date
-        public let published: Date
-        public let updated: Date
+        public let title: String?
+        public let content: Content?
+        public let created: Date?
+        public let published: Date?
+        public let updated: Date?
         public let filename: String
     }
 }
