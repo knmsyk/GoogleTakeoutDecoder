@@ -7,6 +7,8 @@ import Foundation
 import class XMLCoder.XMLDecoder
 
 struct BloggerDecoder {
+    let fileManager: FileManager
+
     private var xmlDecoder: XMLDecoder {
         let decoder = XMLDecoder()
         decoder.dateDecodingStrategy = .formatted(.init(format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"))
@@ -15,13 +17,13 @@ struct BloggerDecoder {
     }
 
     func decode(_ directoryPath: URL) throws -> Blogger {
-        let contents = try FileManager.default.contentsOfDirectory(at: directoryPath, includingPropertiesForKeys: nil, options: [.skipsHiddenFiles])
+        let contents = try fileManager.contentsOfDirectory(at: directoryPath, includingPropertiesForKeys: nil, options: [.skipsHiddenFiles])
 
         var blogger = Blogger(blogs: [])
 
         for content in contents {
             var fileExists: ObjCBool = false
-            FileManager.default.fileExists(atPath: content.path, isDirectory: &fileExists)
+            fileManager.fileExists(atPath: content.path, isDirectory: &fileExists)
             guard fileExists.boolValue else {
                 continue
             }
