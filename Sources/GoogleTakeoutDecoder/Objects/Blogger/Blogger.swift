@@ -57,3 +57,30 @@ extension Blogger.Blog.Entry {
         }
     }
 }
+
+extension Blogger.Blog.Entry {
+    enum CodingKeys: String, CodingKey {
+        case id, type, status, author, title, content, created, updated, filename
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        type = try container.decode(String.self, forKey: .type)
+        status = try container.decode(String.self, forKey: .status)
+        author = try container.decode(Author.self, forKey: .author)
+        title = try container.decode(String.self, forKey: .title)
+        content = try container.decode(Content.self, forKey: .content)
+        filename = try? container.decode(String.self, forKey: .filename)
+        created = try container.decodeDate(key: .created)
+        updated = try container.decodeDate(key: .updated)
+    }
+}
+
+extension KeyedDecodingContainer where K == Blogger.Blog.Entry.CodingKeys {
+    func decodeDate(key: K) throws -> Date? {
+        var rawDate = try decode(String.self, forKey: key)
+        rawDate = rawDate.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
+        return ISO8601DateFormatter().date(from: rawDate)
+    }
+}

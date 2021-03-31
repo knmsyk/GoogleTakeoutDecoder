@@ -27,8 +27,16 @@ final class GoogleTakeoutDecoderTests: XCTestCase {
         XCTAssertEqual(entry?.updated, Date(timeIntervalSinceReferenceDate: 0))
     }
 
+    func testDecodeBlog() throws {
+        let url = FileLoader().url(.atom(.feed))!
+        let blog = try BloggerDecoder.BlogDecoder().decode(url)
+
+        XCTAssertEqual(blog.entry.count, 1)
+    }
+
     static var allTests = [
         ("testDecode", testDecode),
-        ("testDecodeBlogger", testDecodeBlogger)
+        ("testDecodeBlogger", testDecodeBlogger),
+        ("testDecodeBlog", testDecodeBlog)
     ]
 }

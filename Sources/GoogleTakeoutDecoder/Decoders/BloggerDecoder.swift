@@ -55,8 +55,8 @@ extension DateFormatter {
     fileprivate convenience init(format: String) {
         self.init()
         dateFormat = format
-        locale = Locale(identifier: "en_US")
+        locale = Locale(identifier: "en_US_POSIX")
         timeZone = TimeZone(secondsFromGMT: 0)!
-        calendar = Calendar(identifier: .gregorian)
+        calendar = Calendar(identifier: .iso8601)
     }
 }
