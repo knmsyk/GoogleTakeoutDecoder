@@ -28,9 +28,8 @@ extension Blogger.Blog {
         public let title: String?
         public let content: Content?
         public let created: Date?
-        public let published: Date?
         public let updated: Date?
-        public let filename: String
+        public let filename: String?
     }
 }
 

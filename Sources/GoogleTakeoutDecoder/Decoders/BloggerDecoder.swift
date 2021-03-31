@@ -9,13 +9,6 @@ import class XMLCoder.XMLDecoder
 struct BloggerDecoder {
     let fileManager: FileManager
 
-    private var xmlDecoder: XMLDecoder {
-        let decoder = XMLDecoder()
-        decoder.dateDecodingStrategy = .formatted(.init(format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"))
-        decoder.shouldProcessNamespaces = true
-        return decoder
-    }
-
     func decode(_ directoryPath: URL) throws -> Blogger {
         let contents = try fileManager.contentsOfDirectory(at: directoryPath, includingPropertiesForKeys: nil, options: [.skipsHiddenFiles])
 
@@ -28,7 +21,12 @@ struct BloggerDecoder {
                 continue
             }
 
-            let blog = try BlogDecoder(xmlDecoder: xmlDecoder).decode(content)
+            let feedURL =  content.appendingPathComponent("feed").appendingPathExtension("atom")
+            guard fileManager.fileExists(atPath: feedURL.path) else {
+                continue
+            }
+
+            let blog = try BlogDecoder().decode(feedURL)
             blogger.blogs.append(blog)
         }
 
@@ -38,11 +36,15 @@ struct BloggerDecoder {
 
 extension BloggerDecoder {
     struct BlogDecoder {
-        let xmlDecoder: XMLDecoder
+        private var xmlDecoder: XMLDecoder {
+            let decoder = XMLDecoder()
+            decoder.dateDecodingStrategy = .formatted(.init(format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"))
+            decoder.shouldProcessNamespaces = true
+            return decoder
+        }
 
-        func decode(_ directoryPath: URL) throws -> Blogger.Blog {
-            let url = directoryPath.appendingPathComponent("feed").appendingPathExtension("atom")
-            let data = try Data(contentsOf: url)
+        func decode(_ atom: URL) throws -> Blogger.Blog {
+            let data = try Data(contentsOf: atom)
 
             return try xmlDecoder.decode(Blogger.Blog.self, from: data)
         }

@@ -24,12 +24,11 @@ final class GoogleTakeoutDecoderTests: XCTestCase {
         XCTAssertEqual(entry?.content?.type, "html")
         XCTAssertEqual(entry?.filename, "/2008/10/11-4-10-24-a4.html")
         XCTAssertEqual(entry?.created, Date(timeIntervalSinceReferenceDate: 0))
-        XCTAssertEqual(entry?.published, Date(timeIntervalSinceReferenceDate: 0))
         XCTAssertEqual(entry?.updated, Date(timeIntervalSinceReferenceDate: 0))
     }
 
     static var allTests = [
         ("testDecode", testDecode),
-        ("testDecodeBlogger", testDecodeBlogger),
+        ("testDecodeBlogger", testDecodeBlogger)
     ]
 }

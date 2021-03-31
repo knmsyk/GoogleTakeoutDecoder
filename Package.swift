@@ -24,7 +24,8 @@ let package = Package(
             name: "GoogleTakeoutDecoderTests",
             dependencies: ["GoogleTakeoutDecoder"],
             resources: [
-                .process("Data/takeout.zip")
+                .process("Data/takeout.zip"),
+                .process("Data/feed.atom")
             ]
         )
     ]
