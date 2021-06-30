@@ -65,15 +65,17 @@ extension Blogger.Blog.Entry {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decode(String.self, forKey: .id)
-        type = try container.decode(String.self, forKey: .type)
-        status = try container.decode(String.self, forKey: .status)
-        author = try container.decode(Author.self, forKey: .author)
-        title = try container.decode(String.self, forKey: .title)
-        content = try container.decode(Content.self, forKey: .content)
-        filename = try? container.decode(String.self, forKey: .filename)
-        created = try container.decodeDate(key: .created)
-        updated = try container.decodeDate(key: .updated)
+        try self.init(
+            id: container.decode(String.self, forKey: .id),
+            type: container.decode(String.self, forKey: .type),
+            status: container.decode(String.self, forKey: .status),
+            author: container.decode(Author.self, forKey: .author),
+            title: container.decode(String.self, forKey: .title),
+            content: container.decode(Content.self, forKey: .content),
+            created: container.decodeDate(key: .created),
+            updated: container.decodeDate(key: .updated),
+            filename: try? container.decode(String.self, forKey: .filename)
+        )
     }
 }
 

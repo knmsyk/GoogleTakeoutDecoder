@@ -21,7 +21,7 @@ struct BloggerDecoder {
                 continue
             }
 
-            let feedURL =  content.appendingPathComponent("feed").appendingPathExtension("atom")
+            let feedURL = content.appendingPathComponent("feed").appendingPathExtension("atom")
             guard fileManager.fileExists(atPath: feedURL.path) else {
                 continue
             }
