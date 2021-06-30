@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.4
 
 import PackageDescription
 
@@ -25,7 +25,7 @@ let package = Package(
             dependencies: ["GoogleTakeoutDecoder"],
             resources: [
                 .process("Data/takeout.zip"),
-                .process("Data/feed.atom")
+                .copy("Data/Takeout/")
             ]
         )
     ]

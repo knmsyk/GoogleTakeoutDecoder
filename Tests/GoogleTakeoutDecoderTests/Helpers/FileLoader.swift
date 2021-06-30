@@ -18,6 +18,7 @@ extension FileLoader {
     enum File {
         case zip(Zip)
         case atom(Atom)
+        case directory(String)
 
         var name: String {
             switch self {
@@ -25,6 +26,8 @@ extension FileLoader {
                 return zip.rawValue
             case .atom(let atom):
                 return atom.rawValue
+            case .directory(let name):
+                return name
             }
         }
 
@@ -34,6 +37,8 @@ extension FileLoader {
                 return "zip"
             case .atom:
                 return "atom"
+            case .directory:
+                return ""
             }
         }
     }
@@ -43,6 +48,6 @@ extension FileLoader {
     }
 
     enum Atom: String {
-        case feed
+        case feed = "Takeout/Blogger/Blogs/Test/feed"
     }
 }

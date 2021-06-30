@@ -2,7 +2,8 @@ import XCTest
 @testable import GoogleTakeoutDecoder
 
 final class GoogleTakeoutDecoderTests: XCTestCase {
-    private let url = FileLoader().url(.zip(.takeout))!
+    private static let fileLoader = FileLoader()
+    private let url = fileLoader.url(.zip(.takeout))!
 
     func testDecode() throws {
         let object = try GoogleTakeoutDecoder().decode(url)
@@ -28,7 +29,7 @@ final class GoogleTakeoutDecoderTests: XCTestCase {
     }
 
     func testDecodeBlog() throws {
-        let url = FileLoader().url(.atom(.feed))!
+        let url = Self.fileLoader.url(.atom(.feed))!
         let blog = try BloggerDecoder.BlogDecoder().decode(url)
 
         XCTAssertEqual(blog.entry.count, 1)
