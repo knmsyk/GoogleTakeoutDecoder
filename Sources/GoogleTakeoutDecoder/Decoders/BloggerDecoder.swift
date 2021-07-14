@@ -12,7 +12,7 @@ struct BloggerDecoder {
     func decode(_ directoryPath: URL) throws -> Blogger {
         let contents = try fileManager.contentsOfDirectory(at: directoryPath, includingPropertiesForKeys: nil, options: [.skipsHiddenFiles])
 
-        var blogger = Blogger(blogs: [])
+        var blogs = [Blogger.Blog]()
 
         for content in contents {
             var fileExists: ObjCBool = false
@@ -26,10 +26,10 @@ struct BloggerDecoder {
                 continue
             }
 
-            let blog = try BlogDecoder().decode(feedURL)
-            blogger.blogs.append(blog)
+            blogs.append(try BlogDecoder().decode(feedURL))
         }
 
+        let blogger = Blogger(blogs: blogs)
         return blogger
     }
 }
@@ -38,7 +38,7 @@ extension BloggerDecoder {
     struct BlogDecoder {
         private var xmlDecoder: XMLDecoder {
             let decoder = XMLDecoder()
-            decoder.dateDecodingStrategy = .formatted(.init(format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"))
+            decoder.dateDecodingStrategy = .customISO8601
             decoder.shouldProcessNamespaces = true
             return decoder
         }
@@ -48,15 +48,5 @@ extension BloggerDecoder {
 
             return try xmlDecoder.decode(Blogger.Blog.self, from: data)
         }
-    }
-}
-
-extension DateFormatter {
-    fileprivate convenience init(format: String) {
-        self.init()
-        dateFormat = format
-        locale = Locale(identifier: "en_US_POSIX")
-        timeZone = TimeZone(secondsFromGMT: 0)!
-        calendar = Calendar(identifier: .iso8601)
     }
 }

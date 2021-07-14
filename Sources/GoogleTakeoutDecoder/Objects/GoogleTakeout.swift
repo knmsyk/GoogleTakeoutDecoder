@@ -4,6 +4,7 @@
 
 import Foundation
 
-public struct GoogleTakeout: Decodable {
+public struct GoogleTakeout {
+    public var search: Search?
     public var blogger: Blogger?
 }

@@ -14,18 +14,18 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/MaxDesiatov/XMLCoder.git", .upToNextMajor(from: "0.12.0")),
-        .package(url: "https://github.com/weichsel/ZIPFoundation.git", .upToNextMajor(from: "0.9.0"))
+        .package(url: "https://github.com/weichsel/ZIPFoundation.git", .upToNextMajor(from: "0.9.12"))
     ],
     targets: [
         .target(
             name: "GoogleTakeoutDecoder",
-            dependencies: ["XMLCoder", "ZIPFoundation"]),
+            dependencies: ["XMLCoder", "ZIPFoundation"]
+        ),
         .testTarget(
             name: "GoogleTakeoutDecoderTests",
             dependencies: ["GoogleTakeoutDecoder"],
             resources: [
-                .process("Data/takeout.zip"),
-                .copy("Data/Takeout/")
+                .copy("Data/Takeout.zip")
             ]
         )
     ]

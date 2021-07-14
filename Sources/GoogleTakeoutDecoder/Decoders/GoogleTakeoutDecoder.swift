@@ -27,16 +27,22 @@ public struct GoogleTakeoutDecoder {
         var object = GoogleTakeout()
 
         for dataSource in dataSources {
+            let directory = directory(of: dataSource)
             switch dataSource {
+            case .search:
+                object.search = try SearchDecoder(fileManager: fileManager).decode(directory)
             case .blogger:
-                let directoryPath = destination
-                    .appendingPathComponent("Takeout/")
-                    .appendingPathComponent(dataSource.directoryPath)
-                object.blogger = try BloggerDecoder(fileManager: fileManager).decode(directoryPath)
+                object.blogger = try BloggerDecoder(fileManager: fileManager).decode(directory)
             }
         }
 
         return object
+    }
+
+    private func directory(of dataSource: DataSource) -> URL {
+        destination
+            .appendingPathComponent("Takeout/")
+            .appendingPathComponent(dataSource.directoryPath)
     }
 
     private func unzip(_ file: URL) throws {

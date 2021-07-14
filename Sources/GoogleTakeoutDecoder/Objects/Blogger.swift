@@ -8,7 +8,7 @@ import protocol XMLCoder.DynamicNodeEncoding
 import class XMLCoder.XMLEncoder
 
 public struct Blogger: Decodable {
-    public var blogs: [Blog]
+    public let blogs: [Blog]
 }
 
 extension Blogger {
@@ -55,34 +55,5 @@ extension Blogger.Blog.Entry {
                 return .element
             }
         }
-    }
-}
-
-extension Blogger.Blog.Entry {
-    enum CodingKeys: String, CodingKey {
-        case id, type, status, author, title, content, created, updated, filename
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        try self.init(
-            id: container.decode(String.self, forKey: .id),
-            type: container.decode(String.self, forKey: .type),
-            status: container.decode(String.self, forKey: .status),
-            author: container.decode(Author.self, forKey: .author),
-            title: container.decode(String.self, forKey: .title),
-            content: container.decode(Content.self, forKey: .content),
-            created: container.decodeDate(key: .created),
-            updated: container.decodeDate(key: .updated),
-            filename: try? container.decode(String.self, forKey: .filename)
-        )
-    }
-}
-
-extension KeyedDecodingContainer where K == Blogger.Blog.Entry.CodingKeys {
-    func decodeDate(key: K) throws -> Date? {
-        var rawDate = try decode(String.self, forKey: key)
-        rawDate = rawDate.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
-        return ISO8601DateFormatter().date(from: rawDate)
     }
 }

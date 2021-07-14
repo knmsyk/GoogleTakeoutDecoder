@@ -5,12 +5,14 @@
 import Foundation
 
 public enum DataSource: CaseIterable {
-    case blogger
+    case search, blogger
 }
 
 extension DataSource {
     var directoryPath: String {
         switch self {
+        case .search:
+            return "My Activity"
         case .blogger:
             return "Blogger/Blogs"
         }
