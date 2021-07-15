@@ -7,8 +7,8 @@ import Foundation
 import protocol XMLCoder.DynamicNodeEncoding
 import class XMLCoder.XMLEncoder
 
-public struct Blogger: Decodable {
-    public let blogs: [Blog]
+public struct Blogger {
+    public let blogs: [String: Blog]
 }
 
 extension Blogger {

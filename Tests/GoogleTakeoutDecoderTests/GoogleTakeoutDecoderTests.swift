@@ -17,10 +17,11 @@ final class GoogleTakeoutDecoderTests: XCTestCase {
         let blogger = try GoogleTakeoutDecoder([.blogger]).decode(url).blogger
 
         let blog = blogger?.blogs.first
-        XCTAssertEqual(blog?.title, "Blog Title")
-        XCTAssertEqual(blog?.entry.count, 1)
+        XCTAssertEqual(blog?.key, "subdomain")
+        XCTAssertEqual(blog?.value.title, "Blog Title")
+        XCTAssertEqual(blog?.value.entry.count, 1)
 
-        let entry = blog?.entry.first
+        let entry = blog?.value.entry.first
         XCTAssertEqual(entry?.id, "tag:blogger.com,1999:blog-XXXX.post-XXXX")
         XCTAssertEqual(entry?.title, "Test Title")
         XCTAssertEqual(entry?.author.name, "K")

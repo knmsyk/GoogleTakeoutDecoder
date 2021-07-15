@@ -13,7 +13,7 @@ struct BloggerDecoder {
         let blogsDirectory = directoryPath.appendingPathComponent("Blogs")
         let contents = try fileManager.contentsOfDirectory(at: blogsDirectory, includingPropertiesForKeys: nil, options: [.skipsHiddenFiles])
 
-        var blogs = [Blogger.Blog]()
+        var blogs = [String: Blogger.Blog]()
 
         for content in contents {
             var fileExists: ObjCBool = false
@@ -22,16 +22,33 @@ struct BloggerDecoder {
                 continue
             }
 
+            let settingsURL = content.appendingPathComponent("settings").appendingPathExtension("csv")
+            guard let subdomain = try parseSubdomain(from: settingsURL) else {
+                continue
+            }
+
             let feedURL = content.appendingPathComponent("feed").appendingPathExtension("atom")
             guard fileManager.fileExists(atPath: feedURL.path) else {
                 continue
             }
 
-            blogs.append(try BlogDecoder().decode(feedURL))
+            blogs[subdomain] = try BlogDecoder().decode(feedURL)
         }
 
         let blogger = Blogger(blogs: blogs)
         return blogger
+    }
+
+    private func parseSubdomain(from settingsURL: URL) throws -> String? {
+        guard fileManager.fileExists(atPath: settingsURL.path) else {
+            return nil
+        }
+        guard let lines = String(data: try Data(contentsOf: settingsURL), encoding: .utf8)?.split(separator: "\n"),
+              let index = lines.first?.components(separatedBy: ",").firstIndex(of: "blog_subdomain"),
+              let subdomain = lines.last?.components(separatedBy: ",")[index] else {
+            return nil
+        }
+        return subdomain
     }
 }
 
