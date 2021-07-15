@@ -33,6 +33,8 @@ public struct GoogleTakeoutDecoder {
                 object.search = try SearchDecoder(fileManager: fileManager).decode(directory)
             case .blogger:
                 object.blogger = try BloggerDecoder(fileManager: fileManager).decode(directory)
+            case .youtube:
+                object.youtube = try YouTubeDecoder(fileManager: fileManager).decode(directory)
             }
         }
 

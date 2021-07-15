@@ -18,6 +18,13 @@ extension DateFormatter {
     static let iso8601 = DateFormatter(format: "yyyy-MM-dd'T'HH:mm:ssXXXXX")
 }
 
+extension JSONDecoder {
+    convenience init(dateDecodingStrategy: JSONDecoder.DateDecodingStrategy) {
+        self.init()
+        self.dateDecodingStrategy = dateDecodingStrategy
+    }
+}
+
 extension JSONDecoder.DateDecodingStrategy {
     static let customISO8601 = custom {
         let container = try $0.singleValueContainer()

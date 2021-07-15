@@ -37,10 +37,3 @@ struct SearchDecoder {
         return try decoder.decode([Search.Item].self, from: data)
     }
 }
-
-extension JSONDecoder {
-    convenience init(dateDecodingStrategy: JSONDecoder.DateDecodingStrategy) {
-        self.init()
-        self.dateDecodingStrategy = dateDecodingStrategy
-    }
-}

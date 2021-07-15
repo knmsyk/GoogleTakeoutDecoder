@@ -7,4 +7,5 @@ import Foundation
 public struct GoogleTakeout {
     public var search: Search?
     public var blogger: Blogger?
+    public var youtube: YouTube?
 }

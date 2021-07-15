@@ -11,7 +11,7 @@ public struct Search {
         case video = "Video Search"
         case maps = "Maps"
 
-        public var directoryName: String { rawValue }
+        var directoryName: String { rawValue }
     }
 
     public let activities: [Activity]

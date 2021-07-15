@@ -10,7 +10,8 @@ struct BloggerDecoder {
     let fileManager: FileManager
 
     func decode(_ directoryPath: URL) throws -> Blogger {
-        let contents = try fileManager.contentsOfDirectory(at: directoryPath, includingPropertiesForKeys: nil, options: [.skipsHiddenFiles])
+        let blogsDirectory = directoryPath.appendingPathComponent("Blogs")
+        let contents = try fileManager.contentsOfDirectory(at: blogsDirectory, includingPropertiesForKeys: nil, options: [.skipsHiddenFiles])
 
         var blogs = [Blogger.Blog]()
 

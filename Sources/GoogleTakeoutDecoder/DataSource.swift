@@ -5,7 +5,7 @@
 import Foundation
 
 public enum DataSource: CaseIterable {
-    case search, blogger
+    case search, blogger, youtube
 }
 
 extension DataSource {
@@ -14,7 +14,9 @@ extension DataSource {
         case .search:
             return "My Activity"
         case .blogger:
-            return "Blogger/Blogs"
+            return "Blogger"
+        case .youtube:
+            return "YouTube and YouTube Music"
         }
     }
 }
