@@ -8,6 +8,7 @@ final class GoogleTakeoutDecoderTests: XCTestCase {
     func testDecode() throws {
         let object = try GoogleTakeoutDecoder().decode(url)
         XCTAssertEqual(object.blogger?.blogs.count, 1)
+        XCTAssertEqual(object.locationHistory?.locations.count, 2)
         XCTAssertEqual(object.search?.activities.count, 4)
         XCTAssertEqual(object.youtube?.searchHistory.count, 1)
         XCTAssertEqual(object.youtube?.watchHistory.count, 1)
