@@ -31,6 +31,8 @@ final class GoogleTakeoutDecoderTests: XCTestCase {
         XCTAssertEqual(entry?.filename, "/2008/10/11-4-10-24-a4.html")
         XCTAssertEqual(entry?.created, Date(timeIntervalSinceReferenceDate: 0))
         XCTAssertEqual(entry?.updated, Date(timeIntervalSinceReferenceDate: 0))
+        XCTAssertEqual(entry?.category.first?.term, "Category0")
+        XCTAssertEqual(entry?.category.last?.term, "Category1")
     }
 
     static var allTests = [

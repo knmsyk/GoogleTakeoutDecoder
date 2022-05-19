@@ -30,6 +30,7 @@ extension Blogger.Blog {
         public let created: Date?
         public let updated: Date?
         public let filename: String?
+        public let category: [Category]
     }
 }
 
@@ -55,5 +56,10 @@ extension Blogger.Blog.Entry {
                 return .element
             }
         }
+    }
+
+    public struct Category: Decodable {
+        public let scheme: String
+        public let term: String
     }
 }
